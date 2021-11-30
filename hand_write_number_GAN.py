@@ -18,20 +18,21 @@ for i in range(10):
 four_digit_number = '0187'
 Numbers = list(four_digit_number)
 print(Numbers)
-img = []
+imgs = []
 for i in Numbers:
     i = int(i)
-    z = np.random.normal(0, 1, (4 * 4, 100))
+    z = np.random.normal(0, 1, (1, 100))
     fake_imgs = number_GAN_models[i].predict(z)
     fake_imgs = 0.5 * fake_imgs + 0.5
-    img.append(fake_imgs)
+    imgs.append(fake_imgs.reshape(28, 28))
     print(fake_imgs.shape)
 
-_, axs = plt.subplots(1, 4, figsize=(4, 4), sharey=True, sharex=True)
-cnt = 0
+img = imgs[0]
+for i in range(1,4):
+    img = np.append(img, imgs[i], axis=1)
 
-for j in range(4):
-    axs[j].imshow(img[j][cnt, :, :], cmap='gray')
-    axs[j].axis('off')
-    cnt += 1
+print(img.shape)
+plt.cool() # gray, cool, hot, spring, summer, autumn, winter, bone, copper, magma, pink, prism, plasma
+plt.imshow(img)
+plt.axis('off')
 plt.show()
