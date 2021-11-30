@@ -7,11 +7,12 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras import datasets
 import pandas as pd
 
-OUT_DIR = './CNN_OUT_6_img'
+My_number = 6
+OUT_DIR = './CNN_OUT_{}_img'.format(My_number)
 if not os.path.exists(OUT_DIR):  # 원하는 폴더가 없으면 생성한다.
     os.makedirs(OUT_DIR)
 img_shape = (28, 28, 1)
-epoch = 20000
+epoch = 10000
 batch_size = 128
 noise = 100
 sample_interval = 100
@@ -57,7 +58,6 @@ gan_model.compile(loss='binary_crossentropy', optimizer='adam')
 
 (X_train, Y_train), (_, _) = mnist.load_data()
 print(X_train.shape, Y_train.shape)
-My_number = 6
 X_train = X_train[Y_train == My_number]
 print(len(X_train))
 
@@ -113,4 +113,4 @@ for itr in range(epoch):
         plt.savefig(path)
         plt.close()
 
-gan_model.save('./GAN_mnist_{}.h5'.format(My_number))
+generator_model.save('./generator_mnist_{}.h5'.format(My_number))
