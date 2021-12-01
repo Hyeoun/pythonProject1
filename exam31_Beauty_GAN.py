@@ -77,10 +77,10 @@ def preprocess(img):  # 전처리
 def deprocess(img):  # 이미지 복원
     return (img + 1) / 2
 
-img1 = dlib.load_rgb_image('./imgs/no_makeup/vSYYZ429.png')
+img1 = dlib.load_rgb_image('./imgs/makeup/002.jpg')
 img1_faces = align_faces(img1)
 
-img2 = dlib.load_rgb_image('./imgs/makeup/vFG56.png')
+img2 = dlib.load_rgb_image('./imgs/no_makeup/xfsy_0068.png')
 img2_faces = align_faces(img2)
 
 fig, axes = plt.subplots(1, 2, figsize=(16, 10))
