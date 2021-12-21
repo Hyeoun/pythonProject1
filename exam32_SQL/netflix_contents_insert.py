@@ -8,8 +8,6 @@ print(df.head())
 df.info()
 
 df.fillna('', inplace=True)
-df = df.replace("'", "%\\'")
-df = df.replace('"', '%\\"')
 
 conn = pymysql.connect(
         user='root',
@@ -27,7 +25,7 @@ for i in range(len(df)):
         for j in range(12):
             if j != 7:
                 temp = df.iloc[i, j].replace("'", "\\'")
-                temp = df.iloc[i, j].replace('"', '\\"')
+                temp = temp.replace('"', '\\"')
                 a.append('null' if temp == '' else '"{}"'.format(temp))
             else:
                 a.append(df.iloc[i, j])
@@ -55,7 +53,7 @@ for i in range(len(df)):
         print(i)
 
 conn.close()
-with open('./errors_description.pickle', 'wb') as f:
+with open('./errors.pickle', 'wb') as f:
     pickle.dump(errors, f)
 
 # print(df.listed_in.head())
