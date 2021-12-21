@@ -17,15 +17,16 @@ conn = pymysql.connect(
         db='netflix',
         charset='utf8'
     )
-
+# with open('./errors.pickle', 'rb') as f:  # 에러났을때
+#     error_list = pickle.load(f)
 errors = []
-for i in range(len(df)):
+for i in range(len(df)):  # 에러날때 range(len(df)) 대신 error_list를 넣는다.
     try:
         a = []
         for j in range(12):
             if j != 7:
-                temp = df.iloc[i, j].replace("'", "\\'")
-                temp = temp.replace('"', '\\"')
+                temp = df.iloc[i, j].replace("'", "\\\'")
+                temp = temp.replace('"', '\\\"')
                 a.append('null' if temp == '' else '"{}"'.format(temp))
             else:
                 a.append(df.iloc[i, j])
@@ -53,7 +54,7 @@ for i in range(len(df)):
         print(i)
 
 conn.close()
-with open('./errors.pickle', 'wb') as f:
+with open('./errors.pickle', 'wb') as f:  # 통신 에러 대비
     pickle.dump(errors, f)
 
 # print(df.listed_in.head())

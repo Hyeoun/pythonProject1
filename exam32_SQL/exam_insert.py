@@ -10,18 +10,19 @@ class Exam(QWidget, form_window):
         super().__init__()
         self.setupUi(self)
         self.btn_insert.clicked.connect(self.btn_insert_slot)
-        # self.le_userid.setMaxLength(8)
+        self.le_userid.setMaxLength(8)  # 글자수 제한
+        self.le_username.setMaxLength(10)
 
     def btn_insert_slot(self):
         userID, username, birthYear, addr, mobile, height = None, None, None, None, None, None
         userID = self.le_userid.text()
-        if len(userID) > 8:
-            self.le_userid.setText('')
-            userID = None
+        # if len(userID) > 8:
+        #     self.le_userid.setText('')
+        #     userID = None
         username = self.le_username.text()
-        if len(username) > 10:
-            self.le_username.setText('')
-            username = None
+        # if len(username) > 10:
+        #     self.le_username.setText('')
+        #     username = None
         birthYear = self.le_birthyear.text()
         try:
             birthYear = int(birthYear)
